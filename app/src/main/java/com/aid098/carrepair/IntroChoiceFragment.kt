@@ -12,6 +12,7 @@ class IntroChoiceFragment : Fragment() {
 
     // Объявление переменных
     private lateinit var editTextViewMileage: EditText
+    private lateinit var editTextViewName: EditText
     private lateinit var mileageViewModel: MileageViewModel
 
     // Метод, вызываемый при создании представления фрагмента
@@ -25,6 +26,7 @@ class IntroChoiceFragment : Fragment() {
 
         // Привязка переменной к элементу EditText в макете
         editTextViewMileage = rootView.findViewById<EditText>(R.id.mileage)
+        editTextViewName = rootView.findViewById<EditText>(R.id.carName)
 
         // Создание и получение экземпляра ViewModel из активности-хоста фрагмента
         mileageViewModel = ViewModelProvider(requireActivity()).get(MileageViewModel::class.java)
@@ -39,6 +41,15 @@ class IntroChoiceFragment : Fragment() {
             mileageText.toInt()
         } else {
             0
+        }
+    }
+
+    fun getName(): String {
+        val Carname = editTextViewName.text.toString()
+        return if (Carname.isNotEmpty()) {
+            Carname
+        } else {
+            ""
         }
     }
 

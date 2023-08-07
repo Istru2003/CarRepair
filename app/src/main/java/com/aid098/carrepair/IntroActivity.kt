@@ -91,6 +91,7 @@ class IntroActivity : AppIntro() {
         // Создаем интент с данными о пробеге и завершаем активити
         val intent = Intent()
             .putExtra("mileage", choiceFragment.getMileage())
+            .putExtra("name", choiceFragment.getName())
         setResult(RESULT_OK, intent)
         finish()
     }
