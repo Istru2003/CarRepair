@@ -49,7 +49,7 @@ class IntroChoiceFragment : Fragment() {
         return if (Carname.isNotEmpty()) {
             Carname
         } else {
-            ""
+            "Home"
         }
     }
 

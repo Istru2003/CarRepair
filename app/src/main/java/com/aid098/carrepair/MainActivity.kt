@@ -30,6 +30,14 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent) // Запускаем IntroActivity
             finish() // Закрываем текущую активити (MainActivity)
         }
+
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        val carName = IntroChoiceFragment.newInstance().getName()
+        supportActionBar?.title = carName
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
