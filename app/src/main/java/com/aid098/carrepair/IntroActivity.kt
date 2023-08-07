@@ -15,32 +15,40 @@ import com.github.appintro.AppIntroFragment
 
 class IntroActivity : AppIntro() {
 
+    // Переменные для работы с SharedPreferences и фрагментом выбора
     private lateinit var sharedPreferences: SharedPreferences
-
     private lateinit var choiceFragment: IntroChoiceFragment
 
+    // ViewModel для управления данными о пробеге
     private lateinit var mileageViewModel: MileageViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Инициализация ViewModel для управления данными о пробеге
         mileageViewModel = ViewModelProvider(this).get(MileageViewModel::class.java)
 
+        // Получение экземпляра SharedPreferences для проверки первого запуска
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
+        // Создание фрагмента выбора
         choiceFragment = IntroChoiceFragment.newInstance()
     }
+
     override fun onResume() {
         super.onResume()
+        // Проверка, первый ли это запуск приложения
         val isFirstRun = sharedPreferences.getBoolean("isFirstRun", true)
         if (isFirstRun) {
+            // Если первый запуск, показываем слайды интро
             showIntroSlides()
+            // После показа интро, устанавливаем флаг, что приложение больше не первый раз запущено
             sharedPreferences.edit().putBoolean("isFirstRun", false).apply()
         } else {
+            // Если это не первый запуск, переходим на главный экран
             goToMainActivity()
         }
     }
-
 
     private fun showIntroSlides() {
         // Добавляем слайды интро
@@ -71,28 +79,29 @@ class IntroActivity : AppIntro() {
     override fun onSlideChanged(oldFragment: Fragment?, newFragment: Fragment?) {
         super.onSlideChanged(oldFragment, newFragment)
 
-        // Check if the newFragment is the "Choice" slide by comparing tags
-
+        // Проверяем, является ли новый фрагмент слайдом "Choice" по сравнению тегов
+        if (newFragment is IntroChoiceFragment) {
+            // Делаем необходимые действия при смене на слайд "Choice"
+        }
     }
-
-
 
     override fun onDonePressed(currentFragment: Fragment?) {
         super.onDonePressed(currentFragment)
 
+        // Получаем пробег из фрагмента выбора и обновляем ViewModel
         val mileage = choiceFragment.getMileage()
         mileageViewModel.updateMileage(mileage)
 
+        // Создаем интент с данными о пробеге и завершаем активити
         val intent = Intent()
             .putExtra("mileage", choiceFragment.getMileage())
         setResult(RESULT_OK, intent)
         finish()
     }
 
-
+    // Функция для получения цвета из атрибутов темы
     @ColorInt
-    fun Context.getColorFromAttr(@AttrRes attrColor: Int
-    ): Int {
+    fun Context.getColorFromAttr(@AttrRes attrColor: Int): Int {
         val typedArray = theme.obtainStyledAttributes(intArrayOf(attrColor))
         val textColor = typedArray.getColor(0, 0)
         typedArray.recycle()
@@ -100,10 +109,11 @@ class IntroActivity : AppIntro() {
     }
 
     companion object {
-        // Constant for identifying the tag of the slide
+        // Константа для идентификации тега слайда
         private const val ARG_TITLE = "arg_title"
     }
 
 }
+
 
 

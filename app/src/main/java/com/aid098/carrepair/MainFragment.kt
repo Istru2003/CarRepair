@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 
 class MainFragment : Fragment() {
 
+    // Создаем позднюю инициализацию для ViewModel, которая будет использоваться в данном фрагменте
     private lateinit var mileageViewModel: MileageViewModel
 
     override fun onCreateView(
@@ -17,13 +18,18 @@ class MainFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Надуваем макет фрагмента из XML-ресурса
         val rootView = inflater.inflate(R.layout.main_fragment, container, false)
 
+        // Находим TextView в макете по его идентификатору
         val textViewMileage = rootView.findViewById<TextView>(R.id.textViewMileage)
 
+        // Инициализируем ViewModel, связанную с активностью, и получаем доступ к наблюдаемым данным
         mileageViewModel = ViewModelProvider(requireActivity()).get(MileageViewModel::class.java)
 
+        // Настраиваем наблюдение за изменениями данных "mileage" в ViewModel
         mileageViewModel.mileage.observe(viewLifecycleOwner) { mileage ->
+            // Обновляем текст в TextView, используя ресурс строки и значение пробега
             textViewMileage.text = getString(R.string.mileage_hint, mileage)
         }
 
@@ -31,10 +37,12 @@ class MainFragment : Fragment() {
     }
 
     companion object {
+        // Создаем статический метод для создания нового экземпляра MainFragment
         fun newInstance(): MainFragment {
             return MainFragment()
         }
     }
 }
+
 
 

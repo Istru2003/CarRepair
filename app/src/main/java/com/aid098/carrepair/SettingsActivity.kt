@@ -24,37 +24,37 @@ import com.google.firebase.auth.GoogleAuthProvider
 
 class SettingsActivity : AppCompatActivity() {
 
+    // Инициализация объектов
     private lateinit var auth : FirebaseAuth
-
     private lateinit var googleSignInClient: GoogleSignInClient
-
     private lateinit var languageSpinner: Spinner
-
     private lateinit var languageBtn: ImageView
-
     private lateinit var russianLayout: LinearLayout
-
     private lateinit var romanianLayout: LinearLayout
-
     private lateinit var englishLayout: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
 
+        // Получение экземпляра FirebaseAuth
         auth = FirebaseAuth.getInstance()
 
+        // Настройка параметров для аутентификации через Google
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.your_web_client_id))
             .requestEmail()
             .build()
 
+        // Создание клиента для аутентификации через Google
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
+        // Обработчик кнопки для входа через Google
         findViewById<Button>(R.id.gSignInBtn).setOnClickListener {
             signInGoogle()
         }
 
+        // Получение имени пользователя из предыдущей активности и отображение его
         val displayName = intent.getStringExtra("name")
         val account1 = GoogleSignIn.getLastSignedInAccount(this)
         if (account1 != null) {
@@ -63,29 +63,30 @@ class SettingsActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.Nickname).text = getString(R.string.settings_name)
         }
 
+        // Инициализация элементов пользовательского интерфейса
         languageSpinner = findViewById(R.id.languageSpinner)
         languageBtn = findViewById(R.id.languageIc)
         russianLayout = findViewById(R.id.russianLayout)
         romanianLayout = findViewById(R.id.romanianLayout)
         englishLayout = findViewById(R.id.englishLayout)
-
-
     }
 
-
+    // Функция для запуска процесса аутентификации через Google
     private fun signInGoogle(){
         val signInIntent = googleSignInClient.signInIntent
         launcher.launch(signInIntent)
     }
 
+    // Обработчик результата аутентификации через Google
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-        result ->
-            if (result.resultCode == Activity.RESULT_OK){
-                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-                handleResult(task)
-            }
+            result ->
+        if (result.resultCode == Activity.RESULT_OK){
+            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            handleResult(task)
+        }
     }
 
+    // Обработка результата аутентификации и вход в приложение
     private fun handleResult(task: Task<GoogleSignInAccount>) {
         if(task.isSuccessful){
             val account : GoogleSignInAccount? = task.result
@@ -97,6 +98,7 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
+    // Обновление пользовательского интерфейса после успешной аутентификации
     private fun updateUI(account: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(account.idToken , null)
         auth.signInWithCredential(credential).addOnCompleteListener{
@@ -110,8 +112,9 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
+    // Обработчик нажатия кнопки "Назад"
     fun onBackClicked(view: View) {
         onBackPressed()
     }
-
 }
+
