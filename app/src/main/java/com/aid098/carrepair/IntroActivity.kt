@@ -88,10 +88,6 @@ class IntroActivity : AppIntro() {
     override fun onDonePressed(currentFragment: Fragment?) {
         super.onDonePressed(currentFragment)
 
-        // Получаем пробег из фрагмента выбора и обновляем ViewModel
-        val mileage = choiceFragment.getMileage()
-        mileageViewModel.updateMileage(mileage)
-
         // Создаем интент с данными о пробеге и завершаем активити
         val intent = Intent()
             .putExtra("mileage", choiceFragment.getMileage())
