@@ -1,5 +1,6 @@
 package com.aid098.carrepair
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,8 @@ class IntroChoiceFragment : Fragment() {
     private lateinit var editTextViewMileage: EditText
     private lateinit var editTextViewName: EditText
     private lateinit var mileageViewModel: MileageViewModel
+    private var actionBarTitleListener: ActionBarTitleListener? = null
+
 
     // Метод, вызываемый при создании представления фрагмента
     override fun onCreateView(
@@ -30,6 +33,8 @@ class IntroChoiceFragment : Fragment() {
 
         // Создание и получение экземпляра ViewModel из активности-хоста фрагмента
         mileageViewModel = ViewModelProvider(requireActivity()).get(MileageViewModel::class.java)
+
+        actionBarTitleListener?.setActionBarTitle(getName())
 
         return rootView
     }
@@ -53,12 +58,35 @@ class IntroChoiceFragment : Fragment() {
         }
     }
 
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is ActionBarTitleListener) {
+            actionBarTitleListener = context
+        }
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+
+        val carName = getName()
+        actionBarTitleListener?.setActionBarTitle(carName)
+    }
+
     // Статический метод, используемый для создания экземпляра фрагмента
     companion object {
         fun newInstance(): IntroChoiceFragment {
             return IntroChoiceFragment()
         }
     }
+
+    interface ActionBarTitleListener {
+        fun setActionBarTitle(title: String)
+        fun getCarName(): String // Add this function to get the car name
+    }
+
+
 }
 
 
