@@ -22,7 +22,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/main_fragment"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

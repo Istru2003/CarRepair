@@ -36,6 +36,8 @@ class IntroChoiceFragment : Fragment() {
 
         actionBarTitleListener?.setActionBarTitle(getName())
 
+
+
         return rootView
     }
 
@@ -47,6 +49,10 @@ class IntroChoiceFragment : Fragment() {
         } else {
             0
         }
+    }
+
+    fun setMileage(mileage: Int) {
+        editTextViewMileage.setText(mileage.toString())
     }
 
     fun getName(): String {

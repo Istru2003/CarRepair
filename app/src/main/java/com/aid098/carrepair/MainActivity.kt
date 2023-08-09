@@ -13,6 +13,10 @@ class MainActivity : AppCompatActivity(),  IntroChoiceFragment.ActionBarTitleLis
     private lateinit var toolbar: Toolbar
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var introChoiceFragment: IntroChoiceFragment
+    private lateinit var mainFragment: MainFragment
+
+    var mileage: Int = 0
+    var name: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,17 +34,20 @@ class MainActivity : AppCompatActivity(),  IntroChoiceFragment.ActionBarTitleLis
             finish()
         }
 
+        val mileage = intent.getIntExtra("mileage", 0)
+        val name = intent.getStringExtra("name")
+
+        mainFragment = MainFragment()
         introChoiceFragment = IntroChoiceFragment.newInstance()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.textViewMileage, introChoiceFragment) // Use the initialized fragment
-            .commit()
+        introChoiceFragment.setMileage(mileage)
+
 
     }
 
     // Other overridden functions
 
     override fun setActionBarTitle(title: String) {
-        supportActionBar?.title = title
+        supportActionBar?.title = name
     }
 
     // Implement the new function to get the car name

@@ -12,6 +12,7 @@ class MainFragment : Fragment() {
 
     // Создаем позднюю инициализацию для ViewModel, которая будет использоваться в данном фрагменте
     private lateinit var mileageViewModel: MileageViewModel
+    private lateinit var textView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,6 +28,7 @@ class MainFragment : Fragment() {
         // Инициализируем ViewModel, связанную с активностью, и получаем доступ к наблюдаемым данным
         mileageViewModel = ViewModelProvider(requireActivity()).get(MileageViewModel::class.java)
 
+
         // Настраиваем наблюдение за изменениями данных "mileage" в ViewModel
         mileageViewModel.mileage.observe(viewLifecycleOwner) { mileage ->
             // Обновляем текст в TextView, используя ресурс строки и значение пробега
@@ -34,6 +36,10 @@ class MainFragment : Fragment() {
         }
 
         return rootView
+    }
+
+    fun setMileage(mileage: String) {
+        textView.text = mileage
     }
 
     companion object {

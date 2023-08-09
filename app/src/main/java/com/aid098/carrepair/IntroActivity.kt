@@ -17,10 +17,12 @@ class IntroActivity : AppIntro() {
 
     // Переменные для работы с SharedPreferences и фрагментом выбора
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var choiceFragment: IntroChoiceFragment
+
 
     // ViewModel для управления данными о пробеге
     private lateinit var mileageViewModel: MileageViewModel
+
+    private lateinit var introChoiceFragment: IntroChoiceFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +34,8 @@ class IntroActivity : AppIntro() {
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
         // Создание фрагмента выбора
-        choiceFragment = IntroChoiceFragment.newInstance()
+
+        val introChoiceFragment = IntroChoiceFragment()
     }
 
     override fun onResume() {
@@ -67,7 +70,7 @@ class IntroActivity : AppIntro() {
         addSlide(
             AppIntroCustomLayoutFragment.newInstance(R.layout.intro_privacy_police_page)
         )
-        addSlide(choiceFragment)
+        addSlide(introChoiceFragment)
     }
 
     private fun goToMainActivity() {
@@ -85,16 +88,21 @@ class IntroActivity : AppIntro() {
         }
     }
 
-    override fun onDonePressed(currentFragment: Fragment?) {
-        super.onDonePressed(currentFragment)
 
-        // Создаем интент с данными о пробеге и завершаем активити
-        val intent = Intent()
-            .putExtra("mileage", choiceFragment.getMileage())
-            .putExtra("name", choiceFragment.getName())
-        setResult(RESULT_OK, intent)
+    override fun onDonePressed(currentFragment: Fragment?) {
+        val mileage = introChoiceFragment.getMileage()
+        val name = introChoiceFragment.getName()
+
+        val intent = Intent(this, MainActivity::class.java)
+            .putExtra("mileage", mileage.toString())
+            .putExtra("name", name)
+
+        startActivity(intent)
         finish()
     }
+
+
+
 
     // Функция для получения цвета из атрибутов темы
     @ColorInt
