@@ -5,24 +5,21 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
-import android.widget.EditText
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
-import androidx.fragment.app.Fragment
 import com.aid098.carrepair.Fragments.IntroInfoFragment
 import com.github.appintro.AppIntro
 import com.github.appintro.AppIntroCustomLayoutFragment
 import com.github.appintro.AppIntroFragment
 
-class IntroActivity : AppIntro(){
+class IntroActivity : AppIntro(), Communicator{
 
     // Переменные для работы с SharedPreferences и фрагментом выбора
     private lateinit var sharedPreferences: SharedPreferences
 
-    private lateinit var introinfo : IntroInfoFragment
+    private lateinit var introinfo: IntroInfoFragment
 
-
+    private lateinit var communicator: Communicator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +28,7 @@ class IntroActivity : AppIntro(){
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
         introinfo = IntroInfoFragment()
+        introinfo.setCallback(communicator)
 
     }
 
@@ -71,26 +69,13 @@ class IntroActivity : AppIntro(){
 
     private fun goToMainActivity() {
         // Переход на главный экран
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
     }
 
-    override fun onDonePressed(currentFragment: Fragment?) {
-
-        val currentIntroFragment = currentFragment as IntroInfoFragment
-
-        val mileage = currentIntroFragment.editTextMileage.text.toString()
-
-        // передача mileage в intent
-        val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("mileage", mileage.toString())
-
-        startActivity(intent)
-
-        finish()
-
+    private fun communicator(name: String, mileage: Int) {
+        // callback implementation
     }
-
 
     // Функция для получения цвета из атрибутов темы
     @ColorInt
