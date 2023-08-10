@@ -5,37 +5,38 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
+import android.widget.EditText
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.aid098.carrepair.Fragments.IntroInfoFragment
+import com.aid098.carrepair.Fragments.MainFragment
 import com.github.appintro.AppIntro
 import com.github.appintro.AppIntroCustomLayoutFragment
 import com.github.appintro.AppIntroFragment
 
-class IntroActivity : AppIntro() {
+class IntroActivity : AppIntro(), Communicator {
 
     // Переменные для работы с SharedPreferences и фрагментом выбора
     private lateinit var sharedPreferences: SharedPreferences
 
+    private lateinit var introinfo : IntroInfoFragment
 
-    // ViewModel для управления данными о пробеге
-    private lateinit var mileageViewModel: MileageViewModel
+    private lateinit var communicator: Communicator
 
-    private lateinit var introChoiceFragment: IntroChoiceFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Инициализация ViewModel для управления данными о пробеге
-        mileageViewModel = ViewModelProvider(this).get(MileageViewModel::class.java)
-
         // Получение экземпляра SharedPreferences для проверки первого запуска
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
-        // Создание фрагмента выбора
+        introinfo = IntroInfoFragment()
 
-        val introChoiceFragment = IntroChoiceFragment()
+
+        communicator = this
     }
 
     override fun onResume() {
@@ -70,7 +71,7 @@ class IntroActivity : AppIntro() {
         addSlide(
             AppIntroCustomLayoutFragment.newInstance(R.layout.intro_privacy_police_page)
         )
-        addSlide(introChoiceFragment)
+        addSlide(introinfo)
     }
 
     private fun goToMainActivity() {
@@ -79,29 +80,26 @@ class IntroActivity : AppIntro() {
         finish()
     }
 
-    override fun onSlideChanged(oldFragment: Fragment?, newFragment: Fragment?) {
-        super.onSlideChanged(oldFragment, newFragment)
-
-        // Проверяем, является ли новый фрагмент слайдом "Choice" по сравнению тегов
-        if (newFragment is IntroChoiceFragment) {
-            // Делаем необходимые действия при смене на слайд "Choice"
-        }
-    }
-
-
     override fun onDonePressed(currentFragment: Fragment?) {
-        val mileage = introChoiceFragment.getMileage()
-        val name = introChoiceFragment.getName()
+        val introFragment = currentFragment as IntroInfoFragment
+        val mileage = introinfo.editTextMileage.text.toString()
+        Log.d("IntroActivity", "Mileage: $mileage")
 
-        val intent = Intent(this, MainActivity::class.java)
-            .putExtra("mileage", mileage.toString())
-            .putExtra("name", name)
-
-        startActivity(intent)
+        communicator.passData(mileage)
         finish()
     }
 
+    override fun passData(editTextData: String) {
+        val bundle = Bundle()
+        bundle.putString("message", editTextData)
 
+        val transaction = this.supportFragmentManager.beginTransaction()
+        val fragmentB = MainFragment()
+
+        fragmentB.arguments = bundle
+
+        transaction.replace(R.id.fragment_container,fragmentB).commit()
+    }
 
 
     // Функция для получения цвета из атрибутов темы
@@ -111,11 +109,6 @@ class IntroActivity : AppIntro() {
         val textColor = typedArray.getColor(0, 0)
         typedArray.recycle()
         return textColor
-    }
-
-    companion object {
-        // Константа для идентификации тега слайда
-        private const val ARG_TITLE = "arg_title"
     }
 
 }

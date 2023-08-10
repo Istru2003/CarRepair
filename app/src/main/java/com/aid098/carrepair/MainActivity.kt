@@ -6,17 +6,13 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.os.Bundle
+import com.aid098.carrepair.Fragments.MainFragment
 
 
-class MainActivity : AppCompatActivity(),  IntroChoiceFragment.ActionBarTitleListener {
+class MainActivity : AppCompatActivity(){
 
     private lateinit var toolbar: Toolbar
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var introChoiceFragment: IntroChoiceFragment
-    private lateinit var mainFragment: MainFragment
-
-    var mileage: Int = 0
-    var name: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +20,10 @@ class MainActivity : AppCompatActivity(),  IntroChoiceFragment.ActionBarTitleLis
 
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        val fragmentMain = MainFragment()
+
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,fragmentMain).commit()
 
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val isFirstRun = sharedPreferences.getBoolean("isFirstRun", true)
@@ -34,31 +34,8 @@ class MainActivity : AppCompatActivity(),  IntroChoiceFragment.ActionBarTitleLis
             finish()
         }
 
-        val mileage = intent.getIntExtra("mileage", 0)
-        val name = intent.getStringExtra("name")
-
-        mainFragment = MainFragment()
-        introChoiceFragment = IntroChoiceFragment.newInstance()
-        introChoiceFragment.setMileage(mileage)
-
-
     }
 
-    // Other overridden functions
-
-    override fun setActionBarTitle(title: String) {
-        supportActionBar?.title = name
-    }
-
-    // Implement the new function to get the car name
-    override fun getCarName(): String {
-        return introChoiceFragment.getName()
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-    }
 }
 
 
