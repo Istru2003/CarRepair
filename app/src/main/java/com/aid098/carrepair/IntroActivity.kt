@@ -10,21 +10,18 @@ import android.widget.EditText
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.aid098.carrepair.Fragments.IntroInfoFragment
-import com.aid098.carrepair.Fragments.MainFragment
 import com.github.appintro.AppIntro
 import com.github.appintro.AppIntroCustomLayoutFragment
 import com.github.appintro.AppIntroFragment
 
-class IntroActivity : AppIntro(), Communicator {
+class IntroActivity : AppIntro(){
 
     // Переменные для работы с SharedPreferences и фрагментом выбора
     private lateinit var sharedPreferences: SharedPreferences
 
     private lateinit var introinfo : IntroInfoFragment
 
-    private lateinit var communicator: Communicator
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,8 +32,6 @@ class IntroActivity : AppIntro(), Communicator {
 
         introinfo = IntroInfoFragment()
 
-
-        communicator = this
     }
 
     override fun onResume() {
@@ -81,24 +76,19 @@ class IntroActivity : AppIntro(), Communicator {
     }
 
     override fun onDonePressed(currentFragment: Fragment?) {
-        val introFragment = currentFragment as IntroInfoFragment
-        val mileage = introinfo.editTextMileage.text.toString()
-        Log.d("IntroActivity", "Mileage: $mileage")
 
-        communicator.passData(mileage)
+        val currentIntroFragment = currentFragment as IntroInfoFragment
+
+        val mileage = currentIntroFragment.editTextMileage.text.toString()
+
+        // передача mileage в intent
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("mileage", mileage.toString())
+
+        startActivity(intent)
+
         finish()
-    }
 
-    override fun passData(editTextData: String) {
-        val bundle = Bundle()
-        bundle.putString("message", editTextData)
-
-        val transaction = this.supportFragmentManager.beginTransaction()
-        val fragmentB = MainFragment()
-
-        fragmentB.arguments = bundle
-
-        transaction.replace(R.id.fragment_container,fragmentB).commit()
     }
 
 

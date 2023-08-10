@@ -21,9 +21,7 @@ class MainActivity : AppCompatActivity(){
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fragmentMain = MainFragment()
-
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,fragmentMain).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,MainFragment()).commit()
 
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val isFirstRun = sharedPreferences.getBoolean("isFirstRun", true)
