@@ -80,11 +80,12 @@ class IntroActivity : AppIntro(), Communicator{
     }
 
     override fun onDonePressed(currentFragment: Fragment?) {
-//        val carName = introinfo.view?.findViewById<EditText>(R.id.CarName)?.text.toString()
-//        val mileage = introinfo.view?.findViewById<EditText>(R.id.Mileage)?.text.toString()
-        val carName = "111"
-        val mileage = "222"
-        communicator.passData(carName, mileage)
+        val carName = introinfo.view?.findViewById<EditText>(R.id.CarName)?.text.toString()
+        val mileage = introinfo.view?.findViewById<EditText>(R.id.Mileage)?.text.toString()
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("carName", carName)
+        intent.putExtra("mileage", mileage)
+        startActivity(intent)
         finish()
     }
 

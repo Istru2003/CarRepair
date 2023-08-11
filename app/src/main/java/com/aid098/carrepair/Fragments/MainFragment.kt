@@ -10,8 +10,6 @@ import com.aid098.carrepair.R
 
 class MainFragment : Fragment() {
 
-    var output1 : String ?= "1"
-    var output2 : String ?= "1"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -20,10 +18,12 @@ class MainFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
         val textView1 : TextView = view.findViewById(R.id.message1)
         val textView2 : TextView = view.findViewById(R.id.message2)
-//        output1 = arguments?.getString("message1")
-//        output2 = arguments?.getString("message2")
-        textView1.text = "Car name: " + output1
-        textView2.text = "Your mileage: " + output2
+
+        val carName = arguments?.getString("carName")
+        val mileage = arguments?.getString("mileage")
+
+        textView1.text = "Car name: $carName"
+        textView2.text = "Your mileage: $mileage"
         return view
     }
 

@@ -21,8 +21,6 @@ class MainActivity : AppCompatActivity(){
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,MainFragment()).commit()
-
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val isFirstRun = sharedPreferences.getBoolean("isFirstRun", true)
 
@@ -32,6 +30,14 @@ class MainActivity : AppCompatActivity(){
             finish()
         }
 
+        val carName = intent.getStringExtra("carName")
+        val mileage = intent.getStringExtra("mileage")
+
+        val bundle = Bundle()
+        bundle.putString("carName", carName)
+        bundle.putString("mileage", mileage)
+
+        supportFragmentManager.beginTransaction().add(R.id.fragment_container,MainFragment::class.java, bundle).commit()
     }
 
 }
