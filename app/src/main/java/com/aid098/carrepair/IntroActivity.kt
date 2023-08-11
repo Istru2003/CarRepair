@@ -93,7 +93,6 @@ class IntroActivity : AppIntro(), Communicator{
         val transaction = supportFragmentManager.beginTransaction()
         val fragment = MainFragment()
         fragment.arguments = bundle
-        transaction.add(R.id.fragment_container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
