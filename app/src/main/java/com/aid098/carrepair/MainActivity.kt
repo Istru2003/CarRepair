@@ -9,13 +9,10 @@ import android.os.Bundle
 import com.aid098.carrepair.Fragments.MainFragment
 
 
-class MainActivity : AppCompatActivity(), Communicator{
+class MainActivity : AppCompatActivity(){
 
     private lateinit var toolbar: Toolbar
     private lateinit var sharedPreferences: SharedPreferences
-
-    private var carName: String? = null
-    private var mileage: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +21,9 @@ class MainActivity : AppCompatActivity(), Communicator{
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+        val fragmentMain = MainFragment()
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,MainFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,fragmentMain).commit()
 
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val isFirstRun = sharedPreferences.getBoolean("isFirstRun", true)
@@ -37,21 +35,6 @@ class MainActivity : AppCompatActivity(), Communicator{
         }
 
     }
-
-    fun getCarName(): String? {
-        return carName
-    }
-
-    fun getMileage(): Int? {
-        return mileage
-    }
-
-    override fun passData(carName: String, mileage: Int) {
-        this.carName = carName
-        this.mileage = mileage
-    }
-
-
 
 }
 
