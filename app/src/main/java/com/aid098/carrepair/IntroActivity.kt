@@ -81,7 +81,11 @@ class IntroActivity : AppIntro(), Communicator{
 
     override fun onDonePressed(currentFragment: Fragment?) {
         val carName = introinfo.view?.findViewById<EditText>(R.id.CarName)?.text.toString()
-        val mileage = introinfo.view?.findViewById<EditText>(R.id.Mileage)?.text.toString()
+        val mileageText = introinfo.view?.findViewById<EditText>(R.id.Mileage)?.text.toString()
+        var mileage = 0
+        if(mileageText.isNotEmpty()){
+            mileage = mileageText.toInt()
+        }
         val intent = Intent(this, MainActivity::class.java)
         intent.putExtra("carName", carName)
         intent.putExtra("mileage", mileage)
@@ -89,10 +93,10 @@ class IntroActivity : AppIntro(), Communicator{
         finish()
     }
 
-    override fun passData(carName: String, mileage: String) {
+    override fun passData(carName: String, mileage: Int) {
         val bundle = Bundle()
         bundle.putString("message1", carName)
-        bundle.putString("message2", mileage)
+        bundle.putInt("message2", mileage)
         val transaction = supportFragmentManager.beginTransaction()
         val fragment = MainFragment()
         fragment.arguments = bundle

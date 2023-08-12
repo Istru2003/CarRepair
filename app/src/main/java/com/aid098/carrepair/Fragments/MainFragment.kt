@@ -16,14 +16,11 @@ class MainFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_main, container, false)
-        val textView1 : TextView = view.findViewById(R.id.message1)
-        val textView2 : TextView = view.findViewById(R.id.message2)
+        val textView : TextView = view.findViewById(R.id.message2)
 
-        val carName = arguments?.getString("carName")
-        val mileage = arguments?.getString("mileage")
+        val mileage = arguments?.getInt("mileage")
 
-        textView1.text = "Car name: $carName"
-        textView2.text = "Your mileage: $mileage"
+        textView.text = "Your mileage: $mileage"
         return view
     }
 

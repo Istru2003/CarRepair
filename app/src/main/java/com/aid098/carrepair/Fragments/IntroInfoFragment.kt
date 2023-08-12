@@ -20,7 +20,12 @@ class IntroInfoFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_intro_info, container, false)
         editTextCarName = view.findViewById(R.id.CarName)
         editTextMileage = view.findViewById(R.id.Mileage)
+        val mileageText = editTextMileage.text.toString()
+        if(mileageText.isNotEmpty()) {
+            val mileage = mileageText.toInt()
+        }
         return view
     }
+
 
 }
