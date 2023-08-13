@@ -28,7 +28,10 @@
         <item name="colorSwitchThumbNormal">#FFFFFF</item>
         <item name="android:colorForeground">#99FFFFFF</item>
     </style>
-
+    <style name="Theme.CarRepair.Settings" parent="Theme.Material3.*">
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
 
 
 </resources>

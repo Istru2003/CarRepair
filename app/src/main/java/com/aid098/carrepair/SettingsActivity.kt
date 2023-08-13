@@ -27,11 +27,12 @@ class SettingsActivity : AppCompatActivity() {
     // Инициализация объектов
     private lateinit var auth : FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
-    private lateinit var languageSpinner: Spinner
-    private lateinit var languageBtn: ImageView
+
     private lateinit var russianLayout: LinearLayout
     private lateinit var romanianLayout: LinearLayout
     private lateinit var englishLayout: LinearLayout
+
+    private var isLanguageExpanded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,13 +64,44 @@ class SettingsActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.Nickname).text = getString(R.string.settings_name)
         }
 
-        // Инициализация элементов пользовательского интерфейса
-        languageSpinner = findViewById(R.id.languageSpinner)
-        languageBtn = findViewById(R.id.languageIc)
+        val languageSpinner = findViewById<Spinner>(R.id.languageSpinner)
+
+        val languageOptions = arrayOf("Russian", "Romanian", "English") // Замените на свои варианты
+
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, languageOptions)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        languageSpinner.adapter = adapter
+
+        languageSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                // Здесь вы можете выполнить действия при выборе элемента из спиннера
+                val selectedLanguage = languageOptions[position]
+                // Например, обновление языка приложения
+                // Или другие действия в зависимости от выбранного языка
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Вызывается, если ни один элемент не выбран
+            }
+        }
+
+        isLanguageExpanded = false
+
         russianLayout = findViewById(R.id.russianLayout)
         romanianLayout = findViewById(R.id.romanianLayout)
         englishLayout = findViewById(R.id.englishLayout)
+
     }
+
+    fun onLanguageClicked(view: View) {
+        isLanguageExpanded = !isLanguageExpanded
+
+        russianLayout.visibility = if (isLanguageExpanded) View.VISIBLE else View.GONE
+        romanianLayout.visibility = if (isLanguageExpanded) View.VISIBLE else View.GONE
+        englishLayout.visibility = if (isLanguageExpanded) View.VISIBLE else View.GONE
+    }
+
 
     // Функция для запуска процесса аутентификации через Google
     private fun signInGoogle(){

@@ -126,12 +126,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/languageLayout"
                 android:background="@drawable/back"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="20dp"
+                android:onClick="onLanguageClicked"
                 android:orientation="vertical"
                 android:padding="15dp"
                 android:clickable="true"
@@ -168,16 +170,16 @@
 
                 </RelativeLayout>
 
+                <Spinner
+                    android:id="@+id/languageSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/languageIc"
+                    android:layout_centerHorizontal="true"
+                    android:visibility="gone" />
+
             </LinearLayout>
 
-            <!-- Добавим Spinner для отображения списка языков -->
-            <Spinner
-                android:id="@+id/languageSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/languageIc"
-                android:layout_centerHorizontal="true"
-                android:visibility="gone" />
 
             <!-- Определим layout для каждого языка -->
             <LinearLayout
@@ -191,7 +193,8 @@
                 android:orientation="vertical"
                 android:padding="15dp"
                 android:clickable="true"
-                android:foreground="?attr/selectableItemBackground">
+                android:foreground="?attr/selectableItemBackground"
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -218,7 +221,8 @@
                 android:orientation="vertical"
                 android:padding="15dp"
                 android:clickable="true"
-                android:foreground="?attr/selectableItemBackground">
+                android:foreground="?attr/selectableItemBackground"
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -245,7 +249,8 @@
                 android:orientation="vertical"
                 android:padding="15dp"
                 android:clickable="true"
-                android:foreground="?attr/selectableItemBackground">
+                android:foreground="?attr/selectableItemBackground"
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
