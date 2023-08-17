@@ -23,9 +23,7 @@
         </activity>
         <activity android:name=".IntroActivity"/>
         <activity android:name=".SettingsActivity"/>
-        <activity
-            android:name=".SettingsActivity2"
-            android:theme="@style/Theme.M3SelectableComponents"/>
+        <activity android:name=".SettingsActivity2"/>
     </application>
 
 </manifest>

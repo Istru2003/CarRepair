@@ -15,4 +15,9 @@
     <color name="notifications">#13B2C3</color>
     <color name="private_account">#E6A326</color>
     <color name="log_out">#D95F69</color>
+
+    <color name="pink_200">#F48FB1</color>
+    <color name="pink_100">#fff5f7</color>
+
+    <color name="colorPrimary">#7B68EE</color>
 </resources>

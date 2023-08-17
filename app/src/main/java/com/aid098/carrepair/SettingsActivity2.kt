@@ -1,83 +1,24 @@
 package com.aid098.carrepair
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Switch
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import com.aid098.carrepair.ui.theme.M3SelectableComponentsTheme
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.materialswitch.MaterialSwitch
 
+class SettingsActivity2 : AppCompatActivity() {
 
-class SettingsActivity2 : ComponentActivity() {
+    private lateinit var materialSwitch: MaterialSwitch
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent{
-            M3SelectableComponentsTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ){
+        setContentView(R.layout.settings_activity_2)
 
-                }
-            }
+        materialSwitch = findViewById(R.id.MaterialSwitch1)
+        // To check a switch
+        materialSwitch.isChecked = false
+
+        // To listen for a switch's checked/unchecked state changes
+        materialSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+            // Responds to switch being checked/unchecked
         }
     }
-
-}
-
-data class ToggleableInfo(
-    val isChecked: Boolean,
-    val text: String
-)
-
-@Composable
-private fun MySwitch() {
-    var switch by remember{
-        mutableStateOf(
-            ToggleableInfo(
-                isChecked = false,
-                text = "Dark mode"
-            )
-        )
-    }
-
-    Row(
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(text = switch.text)
-        Spacer(modifier = Modifier.weight(1f))
-        Switch(
-            checked = switch.isChecked,
-            onCheckedChange = {isChecked ->
-                switch = switch.copy(isChecked = isChecked)
-            },
-            thumbContent = {
-                Icon(
-                    imageVector = if(switch.isChecked) {
-                        Icons.Default.Check
-                    } else {
-                        Icons.Default.Close
-                    },
-                    contentDescription = null
-                )
-            }
-        )
-    }
-
 }
