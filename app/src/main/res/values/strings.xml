@@ -35,6 +35,8 @@
 
     <string name="switch1">Night Mode</string>
 
+    <string name="night_mode">Night Mode</string>
+    <string name="light_mode">Light Mode</string>
 
 
 </resources>

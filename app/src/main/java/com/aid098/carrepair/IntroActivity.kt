@@ -59,7 +59,7 @@ class IntroActivity : AppIntro(), Communicator{
             AppIntroFragment.newInstance(
                 title = getString(R.string.hello_start),
                 description = getString(R.string.hello_start_description),
-                backgroundColor = getColorFromAttr(androidx.appcompat.R.attr.colorPrimary),
+                backgroundColor = getColor(R.color.purple_200),
                 titleColor = Color.BLACK,
                 descriptionColor = Color.BLACK
             )

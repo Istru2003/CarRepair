@@ -4,23 +4,23 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.aid098.carrepair.Fragments.MainFragment
+import com.google.android.material.appbar.MaterialToolbar
 
 
 class MainActivity : AppCompatActivity(){
 
-    private lateinit var toolbar: Toolbar
+    private lateinit var toolbar: MaterialToolbar
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        toolbar = findViewById(R.id.toolbar)
+        toolbar = findViewById(R.id.topAppBar)
         setSupportActionBar(toolbar)
 
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
