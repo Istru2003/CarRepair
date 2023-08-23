@@ -59,7 +59,7 @@ class IntroActivity : AppIntro(), Communicator{
             AppIntroFragment.newInstance(
                 title = getString(R.string.hello_start),
                 description = getString(R.string.hello_start_description),
-                backgroundColor = getColor(R.color.purple_200),
+                backgroundColor = getColor(R.color.colorPrimary),
                 titleColor = Color.BLACK,
                 descriptionColor = Color.BLACK
             )
@@ -80,15 +80,17 @@ class IntroActivity : AppIntro(), Communicator{
     }
 
     override fun onDonePressed(currentFragment: Fragment?) {
-        val carName = introinfo.view?.findViewById<EditText>(R.id.CarName)?.text.toString()
-        val mileageText = introinfo.view?.findViewById<EditText>(R.id.Mileage)?.text.toString()
+        val carName = introinfo.editTextCarName.text.toString()
+        val mileageText = introinfo.editTextMileage.text.toString()
         var mileage = 0
         if(mileageText.isNotEmpty()){
             mileage = mileageText.toInt()
         }
+        sharedPreferences.edit()
+            .putString("carName", carName)
+            .putInt("mileage", mileage)
+            .apply()
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("carName", carName)
-        intent.putExtra("mileage", mileage)
         startActivity(intent)
         finish()
     }

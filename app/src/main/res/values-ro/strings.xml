@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CarApp</string>
+
+    <string name="hello_start">Bine ați venit!</string>
+    <string name="hello_start_description">Această aplicație este creată pentru a vă ajuta să vă reparați mașina.</string>
+
+    <string name="choice_edittext">Numele mașinii</string>
+    <string name="choice_mileage">Kilometraj</string>
+    <string name="choice_text">Introduceți numele și kilometrajul mașinii</string>
+
+    <string name="your_web_client_id">353010181258-rr0c3hk1g5nb33obegjfo5lagbjk8fvr.apps.googleusercontent.com</string>
+
+    <string name="nav_settings">Setări</string>
+    <string name="nav_about">Despre aplicație</string>
+
+    <string name="text_button_in">Sign In</string>
+    <string name="text_button_out">Sign Out</string>
+
+    <string name="settings_name">Pseudonim</string>
+
+    <string name="switch1">Night Mode</string>
+
+    <string name="night_mode">Night Mode</string>
+    <string name="light_mode">Light Mode</string>
+
+    <string name="language">Limba</string>
+
+    <string name="RU">Rusă</string>
+    <string name="RO">Română</string>
+    <string name="EN">Engleză</string>
+
+    <string name="mileage_main">Kilometrajul dvs:</string>
+
+    <string name="text_intro_info">Introduceți numele și kilometrajul mașinii</string>
+    <string name="carname_intro">Introduceți numele mașinii</string>
+    <string name="mileage_intro">Introduceți kilometrajul</string>
+</resources>

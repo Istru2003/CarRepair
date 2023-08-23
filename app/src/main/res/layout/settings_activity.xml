@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorOnPrimary"
+    tools:context=".SettingsActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/settings_appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="?attr/colorPrimary">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar_settings"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:navigationIcon="@drawable/arrow_back"
+            app:title="@string/nav_settings"
+            app:titleTextColor="?attr/colorOnSecondary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/Nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/settings_name"
+        android:textColor="?attr/colorOnSecondary"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/MaterialSwitch1"
+        app:layout_constraintEnd_toStartOf="@+id/gSignInBtn"
+        app:layout_constraintHorizontal_bias="0.264"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/settings_appBarLayout"
+        app:layout_constraintVertical_bias="0.768" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/gSignInBtn"
+        android:layout_width="134dp"
+        android:layout_height="66dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="564dp"
+        android:text="@string/text_button_in"
+        android:textColor="?attr/colorOnPrimary"
+        android:textStyle="bold"
+        app:backgroundTint="?attr/colorOnSecondary"
+        app:icon="@drawable/googlelogo"
+        app:iconGravity="start"
+        app:iconPadding="4dp"
+        app:iconSize="20dp"
+        app:iconTint="?attr/colorOnPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.995"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/MaterialSwitch1"
+        style="@style/Widget.App.Switch"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:text="@string/night_mode"
+        android:textColor="?attr/colorOnSecondary"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.296"
+        app:thumbIcon="@drawable/default_switch_icon"
+        app:thumbIconTint="#9CD57C"
+        app:thumbTint="#416F06" />
+
+    <LinearLayout
+        android:layout_width="323dp"
+        android:layout_height="86dp"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MaterialSwitch1"
+        app:layout_constraintVertical_bias="0.072">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:hint="@string/language"
+            app:hintTextColor="?attr/colorOnSecondary">
+
+            <AutoCompleteTextView
+                android:id="@+id/auto_complete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

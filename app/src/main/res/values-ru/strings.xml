@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CarApp</string>
+
+    <string name="hello_start">Добро пожаловать!</string>
+    <string name="hello_start_description">Это приложение создано, чтобы помочь вам в ремонте вашего автомобиля</string>
+
+    <string name="choice_edittext">Название автомобиля</string>
+    <string name="choice_mileage">Пробег</string>
+    <string name="choice_text">Введите имя и пробег автомобиля</string>
+
+    <string name="your_web_client_id">353010181258-rr0c3hk1g5nb33obegjfo5lagbjk8fvr.apps.googleusercontent.com</string>
+
+    <string name="nav_settings">Настройки</string>
+    <string name="nav_about">О программе</string>
+
+    <string name="text_button_in">Sign In</string>
+    <string name="text_button_out">Sign Out</string>
+
+    <string name="settings_name">Псевдоним</string>
+
+    <string name="switch1">Night Mode</string>
+
+    <string name="night_mode">Night Mode</string>
+    <string name="light_mode">Light Mode</string>
+
+    <string name="language">Язык</string>
+
+    <string name="RU">Русский</string>
+    <string name="RO">Rумынский</string>
+    <string name="EN">Английский</string>
+
+    <string name="mileage_main">Ваш пробег:</string>
+
+    <string name="text_intro_info">Введите название автомобиля и пробег</string>
+    <string name="carname_intro">Введите название автомобиля</string>
+    <string name="mileage_intro">Введите пробег</string>
+</resources>

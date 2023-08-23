@@ -20,7 +20,8 @@ class MainFragment : Fragment() {
 
         val mileage = arguments?.getInt("mileage")
 
-        textView.text = "Your mileage: $mileage"
+        textView.text = getString(R.string.mileage_main) + " $mileage"
+
         return view
     }
 
