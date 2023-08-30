@@ -21,5 +21,16 @@ class MyApplication : Application() {
             intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             context.startActivity(intent)
         }
+        fun setSelectedCarIndex(context: Context, index: Int) {
+            val sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putInt("selectedCarIndex", index)
+            editor.apply()
+        }
+
+        fun getSelectedCarIndex(context: Context): Int {
+            val sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+            return sharedPreferences.getInt("selectedCarIndex", 0)
+        }
     }
 }

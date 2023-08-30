@@ -10,6 +10,8 @@ import com.aid098.carrepair.R
 
 class MainFragment : Fragment() {
 
+    private var currentMileage: Int? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -23,6 +25,12 @@ class MainFragment : Fragment() {
         textView.text = getString(R.string.mileage_main) + " $mileage"
 
         return view
+    }
+
+    fun updateMileage(mileage: Int) {
+        currentMileage = mileage
+        val textView: TextView = requireView().findViewById(R.id.message2)
+        textView.text = getString(R.string.mileage_main) + " $mileage"
     }
 
 

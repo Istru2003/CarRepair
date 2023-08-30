@@ -35,7 +35,6 @@ class IntroActivity : AppIntro(), Communicator{
         communicator = this
 
 
-
     }
 
     override fun onResume() {
@@ -74,9 +73,9 @@ class IntroActivity : AppIntro(), Communicator{
     }
 
     private fun goToMainActivity() {
-        // Переход на главный экран
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
     }
 
     override fun onDonePressed(currentFragment: Fragment?) {

@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
@@ -22,7 +21,6 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import java.util.Locale
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -41,29 +39,23 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
 
-        // Получение экземпляра FirebaseAuth
+        // Obtain an instance of FirebaseAuth
         auth = FirebaseAuth.getInstance()
 
-        // Настройка параметров для аутентификации через Google
+        // Configure Google authentication options
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.your_web_client_id))
             .requestEmail()
             .build()
 
-        // Создание клиента для аутентификации через Google
+        // Create a GoogleSignInClient
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        // Обработчик кнопки для входа через Google
-        findViewById<Button>(R.id.gSignInBtn).setOnClickListener {
-            signInGoogle()
-        }
-
-        // Инициализация кнопки и флага входа
+        // Set up the Google Sign-In button click listener
         googleSignInButton = findViewById<Button>(R.id.gSignInBtn)
         isUserSignedIn = GoogleSignIn.getLastSignedInAccount(this) != null
         updateSignInButtonText()
 
-        // Обработчик кнопки для входа/выхода через Google
         googleSignInButton.setOnClickListener {
             if (isUserSignedIn) {
                 signOutGoogle()
@@ -75,36 +67,28 @@ class SettingsActivity : AppCompatActivity() {
         materialSwitch = findViewById(R.id.MaterialSwitch1)
         topAppBar = findViewById(R.id.topAppBar_settings)
 
-
-        // To check a switch
-
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val isDarkTheme = sharedPreferences.getBoolean("isDarkTheme", false) // Provide a default value
+        val isDarkTheme = sharedPreferences.getBoolean("isDarkTheme", false)
         materialSwitch.isChecked = isDarkTheme
         displayName = sharedPreferences.getString("displayName", getString(R.string.settings_name))!!
 
         findViewById<TextView>(R.id.Nickname).text = displayName
 
-
-        // To listen for a switch's checked/unchecked state changes
         materialSwitch.setOnCheckedChangeListener { _, isChecked ->
             val newTheme = if (isChecked) {
                 AppCompatDelegate.MODE_NIGHT_YES
             } else {
                 AppCompatDelegate.MODE_NIGHT_NO
             }
-
-            // Save the new theme preference to SharedPreferences
             val editor = sharedPreferences.edit()
             editor.putBoolean("isDarkTheme", isChecked)
             editor.apply()
-
             AppCompatDelegate.setDefaultNightMode(newTheme)
-
         }
 
-        val savedLanguage = sharedPreferences.getString("selectedLanguage", "en") ?: "en"
-        setLocale(savedLanguage)
+        topAppBar.setNavigationOnClickListener {
+            finish()
+        }
 
 
         val items = listOf(
@@ -112,48 +96,20 @@ class SettingsActivity : AppCompatActivity() {
             getString(R.string.RO),
             getString(R.string.EN)
         )
-
-        val autoComplete: AutoCompleteTextView = findViewById(R.id.auto_complete)
-
         val adapter = ArrayAdapter(this, R.layout.language_list, items)
-        autoComplete.setAdapter(adapter)
-
-        autoComplete.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
-            val selectedLanguage = adapterView.getItemAtPosition(i) as String
-            when (selectedLanguage) {
-                getString(R.string.RU) ?: "" -> {
-                    MyApplication.setLocale(this, "ru")
-                    MyApplication.restartActivity(this)
-                }
-                getString(R.string.RO) ?: "" -> {
-                    MyApplication.setLocale(this, "ro")
-                    MyApplication.restartActivity(this)
-                }
-                getString(R.string.EN) ?: "" -> {
-                    MyApplication.setLocale(this, "en")
-                    MyApplication.restartActivity(this)
-                }
-            }
-        }
-
-
-
-
-        topAppBar.setNavigationOnClickListener {
-            // Handle navigation icon press
-            finish()
-        }
+        (findViewById<AutoCompleteTextView>(R.id.auto_complete)).setAdapter(adapter)
 
     }
+
 
     private fun updateSignInButtonText() {
-        if (isUserSignedIn) {
-            googleSignInButton.text = getString(R.string.text_button_out)
+        googleSignInButton.text = if (isUserSignedIn) {
+            getString(R.string.text_button_out)
         } else {
-            googleSignInButton.text = getString(R.string.text_button_in)
+            getString(R.string.text_button_in)
         }
     }
-    // Функция для запуска процесса аутентификации через Google
+
     private fun signInGoogle(){
         val signInIntent = googleSignInClient.signInIntent
         launcher.launch(signInIntent)
@@ -161,13 +117,10 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun signOutGoogle() {
         googleSignInClient.signOut().addOnCompleteListener(this) {
-            // Очищаем имя пользователя и сохраняем в SharedPreferences
             displayName = getString(R.string.settings_name)
             val editor = sharedPreferences.edit()
             editor.putString("displayName", displayName)
             editor.apply()
-
-            // Обновляем текст кнопки и флаг входа
             googleSignInButton.text = getString(R.string.text_button_in)
             isUserSignedIn = false
             findViewById<TextView>(R.id.Nickname).text = displayName
@@ -175,7 +128,6 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    // Обработчик результата аутентификации через Google
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             result ->
         if (result.resultCode == Activity.RESULT_OK){
@@ -184,7 +136,6 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    // Обработка результата аутентификации и вход в приложение
     private fun handleResult(task: Task<GoogleSignInAccount>) {
         if(task.isSuccessful){
             val account : GoogleSignInAccount? = task.result
@@ -196,20 +147,15 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    // Обновление пользовательского интерфейса после успешной аутентификации
     private fun updateUI(account: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
                 displayName = account.displayName ?: ""
                 findViewById<TextView>(R.id.Nickname).text = displayName
-
-                // Сохранение имени пользователя в SharedPreferences
                 val editor = sharedPreferences.edit()
                 editor.putString("displayName", displayName)
                 editor.apply()
-
-                // Обновляем текст кнопки и флаг входа
                 isUserSignedIn = true
                 updateSignInButtonText()
             } else {
@@ -218,18 +164,6 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    private fun setLocale(languageCode: String) {
-        val config = resources.configuration
-        val locale = Locale(languageCode)
-        Locale.setDefault(locale)
-        config.setLocale(locale)
-        resources.updateConfiguration(config, resources.displayMetrics)
-
-        // Сохраните выбранный язык в настройках
-        val editor = sharedPreferences.edit()
-        editor.putString("selectedLanguage", languageCode)
-        editor.apply()
-    }
 
 
 }

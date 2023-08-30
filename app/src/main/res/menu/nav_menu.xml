@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.aid098.car_app.MainActivity">
 
+    <item
+        android:id="@+id/addingacar"
+        android:icon="@drawable/ic_add_24dp"
+        android:title="Add a Car"
+        android:iconTint="@color/black"
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/nav_settings_id"

@@ -35,4 +35,12 @@
     <string name="text_intro_info">Введите название автомобиля и пробег</string>
     <string name="carname_intro">Введите название автомобиля</string>
     <string name="mileage_intro">Введите пробег</string>
+
+    <string name="dialog_cancel">Отмена</string>
+    <string name="dialog_decline">Отклонить</string>
+    <string name="dialog_accept">Принять</string>
+
+    <string name="warning_dialog">Ошибка</string>
+    <string name="warning_description">Некоторые поля пусты</string>
+
 </resources>

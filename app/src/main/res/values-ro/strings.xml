@@ -35,4 +35,11 @@
     <string name="text_intro_info">Introduceți numele și kilometrajul mașinii</string>
     <string name="carname_intro">Introduceți numele mașinii</string>
     <string name="mileage_intro">Introduceți kilometrajul</string>
+
+    <string name="dialog_cancel">Anulați</string>
+    <string name="dialog_decline">Refuză</string>
+    <string name="dialog_accept">Accept</string>
+
+    <string name="warning_dialog">Eroare</string>
+    <string name="warning_description">Unele câmpuri sunt goale</string>
 </resources>

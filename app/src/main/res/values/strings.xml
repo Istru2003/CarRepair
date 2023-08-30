@@ -30,8 +30,15 @@
     <string name="EN">English</string>
 
     <string name="mileage_main">Your mileage:</string>
-
     <string name="text_intro_info">Enter Car name and Mileage</string>
     <string name="carname_intro">Enter Car Name</string>
     <string name="mileage_intro">Enter Mileage</string>
+
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_decline">Decline</string>
+    <string name="dialog_accept">Accept</string>
+
+    <string name="warning_dialog">Warning</string>
+    <string name="warning_description">Some fields are empty</string>
+
 </resources>

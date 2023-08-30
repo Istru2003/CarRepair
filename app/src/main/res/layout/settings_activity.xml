@@ -27,48 +27,61 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:id="@+id/Nickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/settings_name"
-        android:textColor="?attr/colorOnSecondary"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/MaterialSwitch1"
-        app:layout_constraintEnd_toStartOf="@+id/gSignInBtn"
-        app:layout_constraintHorizontal_bias="0.264"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/settings_appBarLayout"
-        app:layout_constraintVertical_bias="0.768" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/gSignInBtn"
-        android:layout_width="134dp"
-        android:layout_height="66dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="564dp"
-        android:text="@string/text_button_in"
-        android:textColor="?attr/colorOnPrimary"
-        android:textStyle="bold"
-        app:backgroundTint="?attr/colorOnSecondary"
-        app:icon="@drawable/googlelogo"
-        app:iconGravity="start"
-        app:iconPadding="4dp"
-        app:iconSize="20dp"
-        app:iconTint="?attr/colorOnPrimary"
+    <LinearLayout
+        android:layout_width="319dp"
+        android:layout_height="69dp"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.995"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_appBarLayout"
+        app:layout_constraintVertical_bias="0.079">
+
+        <TextView
+            android:id="@+id/Nickname"
+            android:layout_width="155dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/settings_name"
+            android:textColor="?attr/colorOnSecondary"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/MaterialSwitch1"
+            app:layout_constraintEnd_toStartOf="@+id/gSignInBtn"
+            app:layout_constraintHorizontal_bias="0.264"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/settings_appBarLayout"
+            app:layout_constraintVertical_bias="0.768" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/gSignInBtn"
+            android:layout_width="134dp"
+            android:layout_height="66dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/text_button_in"
+            android:textColor="?attr/colorOnPrimary"
+            android:textStyle="bold"
+            app:backgroundTint="?attr/colorOnSecondary"
+            app:icon="@drawable/googlelogo"
+            app:iconGravity="start"
+            app:iconPadding="4dp"
+            app:iconSize="20dp"
+            app:iconTint="?attr/colorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.995"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </LinearLayout>
 
     <com.google.android.material.materialswitch.MaterialSwitch
         android:id="@+id/MaterialSwitch1"
         style="@style/Widget.App.Switch"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
+        android:layout_width="321dp"
+        android:layout_height="62dp"
         android:text="@string/night_mode"
         android:textColor="?attr/colorOnSecondary"
         android:textSize="20sp"
@@ -83,6 +96,7 @@
         app:thumbTint="#416F06" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="323dp"
         android:layout_height="86dp"
         android:focusableInTouchMode="true"
@@ -104,13 +118,14 @@
 
             <AutoCompleteTextView
                 android:id="@+id/auto_complete"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="305dp"
+                android:layout_height="match_parent"
                 android:inputType="none" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
 
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
